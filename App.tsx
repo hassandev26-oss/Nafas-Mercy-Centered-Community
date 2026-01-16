@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MainLayout } from './components/MainLayout';
+import { Layout } from './components/Layout';
 import { LandingPage } from './views/LandingPage';
 import { Onboarding } from './views/Onboarding';
 import { Circle } from './views/Circle';
@@ -61,14 +61,14 @@ const App: React.FC = () => {
   };
 
   return (
-    <MainLayout 
+    <Layout 
       currentView={currentView} 
       user={user}
       onNavigate={setCurrentView}
       onLogout={handleLogout}
     >
       {renderView()}
-    </MainLayout>
+    </Layout>
   );
 };
 
