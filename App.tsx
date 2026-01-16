@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout } from './components/Layout';
+import { MainLayout } from './components/MainLayout';
 import { LandingPage } from './views/LandingPage';
 import { Onboarding } from './views/Onboarding';
 import { Circle } from './views/Circle';
@@ -12,8 +12,12 @@ const App: React.FC = () => {
   
   // Persist user state in session for demo purposes
   const [user, setUser] = useState<UserContext>(() => {
-    const saved = sessionStorage.getItem('nafas_user');
-    return saved ? JSON.parse(saved) : { onboarded: false };
+    try {
+      const saved = sessionStorage.getItem('nafas_user');
+      return saved ? JSON.parse(saved) : { onboarded: false };
+    } catch (e) {
+      return { onboarded: false };
+    }
   });
 
   useEffect(() => {
@@ -57,14 +61,14 @@ const App: React.FC = () => {
   };
 
   return (
-    <Layout 
+    <MainLayout 
       currentView={currentView} 
       user={user}
       onNavigate={setCurrentView}
       onLogout={handleLogout}
     >
       {renderView()}
-    </Layout>
+    </MainLayout>
   );
 };
 
